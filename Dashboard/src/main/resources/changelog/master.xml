@@ -17,4 +17,11 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20240624-2" author="Nzeh Daniel">
+        <addColumn tableName="User_Info">
+            <column name="role" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
