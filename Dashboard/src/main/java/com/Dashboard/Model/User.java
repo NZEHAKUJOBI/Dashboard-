@@ -25,6 +25,11 @@ public class User implements UserDetails {
 
     private String role;
 
+    private String email;
+
+
+
+
     @UpdateTimestamp
     private Date enrollment_date;
 
@@ -95,6 +100,14 @@ public class User implements UserDetails {
 
     public void setEnrollment_date(Date enrollment_date) {
         this.enrollment_date = enrollment_date;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 
