@@ -31,7 +31,14 @@ public class AuthenticationService {
 }
 
     public User authenticate(LoginUserDto input) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword()));
-        return userRepository.findByUsername(input.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        input.getUsername(),
+                        input.getPassword()
+                )
+        );
+
+        return userRepository.findByUsername(input.getUsername())
+                .orElseThrow();
     }
 }
