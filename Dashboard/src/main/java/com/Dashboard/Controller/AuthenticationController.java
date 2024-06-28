@@ -6,6 +6,8 @@ import com.Dashboard.DTO.RegisterUserDto;
 import com.Dashboard.Model.User;
 import com.Dashboard.Security.JwtService;
 import com.Dashboard.Services.AuthenticationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +21,12 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    private final LoginResponse loginResponse;
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService, LoginResponse loginResponse) {
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
+
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
-        this.loginResponse = loginResponse;
     }
 
     @PostMapping("/signup")
@@ -33,16 +36,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredUser);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
-//        User authenticatedUser = authenticationService.authenticate(loginUserDto);
-//
-//        String jwtToken = jwtService.generateToken(authenticatedUser);
-//
-//        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
-//
-//        return ResponseEntity.ok(loginResponse);
-//    }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {

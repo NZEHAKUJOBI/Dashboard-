@@ -2,7 +2,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet id="20170503041524-1" author="Nzeh Daniel">
-        <createTable tableName="User_Info">
+        <createTable tableName="user_info">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -18,8 +18,15 @@
         </createTable>
     </changeSet>
     <changeSet id="20240624-2" author="Nzeh Daniel">
-        <addColumn tableName="User_Info">
+        <addColumn tableName="user_info">
             <column name="role" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="20240627-3" author="Nzeh Daniel">
+        <addColumn tableName="user_info">
+            <column name="email" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
         </addColumn>

@@ -1,12 +1,9 @@
 package com.Dashboard.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,29 +11,30 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "User_Info")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name= "user_name")
     private String username;
-
+    @Column(name= "password")
     private String password;
-
+    @Column(name= "role")
     private String role;
-
+    @Column(name= "email")
     private String email;
 
-
-
-
+    @Column(name= "enrollment_date")
     @UpdateTimestamp
     private Date enrollment_date;
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of();
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -58,7 +56,13 @@ public class User implements UserDetails {
         return true;
     }
 
-    // Getters and Setters
+//    public List<String> getRoles() {
+//        return getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.toList());
+//    }
+//
+//    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -109,6 +113,4 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 }
